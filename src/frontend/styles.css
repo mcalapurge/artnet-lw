@@ -1,0 +1,8 @@
+.container {
+    margin: 5em;
+    display: flex;
+}
+.button {
+    flex: 1;
+    min-height: 10em;
+}

@@ -77,7 +77,7 @@ export default class ArtnetHelpers {
                 break;
         }
         if (err === 1){
-            console.log(msg);
+            return msg;
         } else {
             let startAddr = lampNumber*8 + ledNumber*3 + 1;
             artnet.set(startAddr, this.colors[color]);
@@ -109,7 +109,7 @@ export default class ArtnetHelpers {
             err = 0;
         }
         if (err === 1){
-            console.log(msg);
+            return msg;
         } else {
             let startAddr = lampNumber*8 + ledNumber*3 + 1;
             artnet.set(startAddr, this.parseHex(hexColor));
