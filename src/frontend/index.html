@@ -9,22 +9,21 @@
 <body>
     <h1 id="hello-world">Text</h1>
     <div class="container">
-        <div class="button" id="red"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
-        <div class="button"></div>
+        <div id="red">
+            <form id="redForm" onsubmit="redLight(event)">
+                <label for="redlamp">Lamp Number</label>
+                <input type="number" name="redlamp" id="redLampInput">            <label for="redlamp"></label>
+                <label for="redlamp">LED number</label>
+                <input type="number" name="redLed" id="redLEDInput">
+                <button type="submit" id="redButton">Set</button>
+            </form>
+        </div>
+        <div id="reset">
+            <form id="resetForm" onsubmit="resetLight(event)">
+                <spacer />
+                <button type="submit" id="resetButton">reset</button>
+            </form>
+        </div>
     </div>
     <script src="index.js"></script>
 </body>

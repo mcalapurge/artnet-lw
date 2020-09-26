@@ -20,21 +20,25 @@ artnetHelpers.resetUniverse(() => {
 
     app.get('/setcolor', (req, res) => {
         let msg = JSON.stringify(req.query, null, 2);
-        if (req.params.color && req.query.led && req.query.lamp) {
-            artnetHelpers.setLamp(req.query.lamp, req.query.led, req.query.color)
+        if (req.query.color && req.query.led && req.query.lamp) {
+            artnetHelpers.setLamp(req.query.lamp, req.query.led, req.query.color);
         } else {
-            mgs = msg + '\nParams not provided for request.'
+            msg = msg + '\nParams not provided for request.'
         }
         res.send(JSON.stringify(req.query), null, 2);
     });
       
-
+ 
+    /**
+     * route queryparams = hex & lamp & led
+     * /sethexcolor?hex=ffffff&lamp=0&led=0
+     */
     app.get('/sethexcolor', (req, res) => {
         let msg = JSON.stringify(req.query, null, 2);
         if (req.query.hex && req.query.led && req.query.lamp) {
             artnetHelpers.setLampHex(req.query.lamp, req.query.led, req.query.hex)
         } else {
-            mgs = msg + '\nParams not provided for request.'
+            msg = msg + '\nParams not provided for request.'
         }
         res.send(JSON.stringify(req.query), null, 2);
     });
