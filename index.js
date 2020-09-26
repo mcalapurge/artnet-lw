@@ -20,7 +20,7 @@ artnetHelpers.resetUniverse(() => {
 
     app.get('/setcolor', (req, res) => {
         let msg = JSON.stringify(req.query, null, 2);
-            if (req.query.color && req.query.led && req.query.lamp && req.query.intensity) {
+        if (req.query.color && req.query.led && req.query.lamp && req.query.intensity) {
             artnetHelpers.setLamp(req.query.lamp, req.query.led, req.query.color, req.query.intensity);
         } else if (req.query.color && req.query.led && req.query.lamp) {
             artnetHelpers.setLamp(req.query.lamp, req.query.led, req.query.color);
@@ -46,7 +46,7 @@ artnetHelpers.resetUniverse(() => {
     });
 
 
-    app.get(['/reset', '/lightsout', '/lightsoff', '/blackout'], (req, res) => {
+    app.get(['/reset', '/lightsout', '/lightsoff', '/blackout'], (res) => {
         artnetHelpers.resetUniverse(()=>{
             res.send({"msg": "Universe reset"});
         });

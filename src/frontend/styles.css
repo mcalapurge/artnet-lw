@@ -1,6 +1,7 @@
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
+    cursor: context-menu;
 }
 .container {
     margin: 5em;
@@ -12,16 +13,27 @@
     flex-direction: column;
     background-color: red;
 }
+
 #reset {
-    height: 100%;
-    flex: 0 10em;
-    min-height: 10em;
-    flex-direction: column;
-    background-color: gray;
+    cursor: pointer;
 }
 
-spacer {
-    display: block;
-    height: 100%;
+.lamp {
     margin: auto;
+    background-color: black;
+    display: block;
+    width: 1000px;
+    height: 160px;
+}
+
+.led {
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 25px 4px;
+    display: inline-block;
+    background-color: black;
+    min-width: 110px;
+    min-height: 110px;
+    box-sizing: border-box;
+    border: white 2px solid;
 }

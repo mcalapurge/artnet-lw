@@ -81,10 +81,11 @@ export default class ArtnetHelpers {
         if (err === 1){
             return msg;
         } else {
-            let startAddr = lampNumber*8 + ledNumber*3 + 1;
+            let lampType = 8 * 3;
+            let startAddr = lampNumber*lampType + ledNumber*3 + 1;
             let colorArray = [];
             colors[color].forEach((channel) => {
-                channel = Math.ceil(((channel / 100) * intensityVal));
+                channel = Math.ceil((channel / 100) * intensityVal);
                 colorArray.push(channel);
             });
             artnet.set(startAddr, colorArray);
@@ -118,7 +119,9 @@ export default class ArtnetHelpers {
         if (err === 1){
             return msg;
         } else {
-            let startAddr = lampNumber*8 + ledNumber*3 + 1;
+            let lampType = 8 * 3;
+            let startAddr = lampNumber*lampType + ledNumber*3 + 1;
+            console.log((startAddr >>> 0).toString(2))
             artnet.set(startAddr, this.parseHex(hexColor));
         }
     }
