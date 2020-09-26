@@ -1,4 +1,5 @@
 import Artnet from 'artnet';
+import colors from '../data/colors.js';
 const artnet = new Artnet({refresh: 100, sendAll: true});
 
 export default class ArtnetHelpers {
@@ -6,13 +7,6 @@ export default class ArtnetHelpers {
     host = '192.168.1.117';
     numberOfLamps = 8;
     ledsPerLamp = 8;
-
-    colors = {
-        'red': [255, 0, 0],
-        'blue': [0, 255, 0],
-        'green': [0, 0, 255],
-        'white': [255, 255, 255]
-    };
 
     /**
      * 
@@ -50,7 +44,15 @@ export default class ArtnetHelpers {
      * @param {number} ledNumber led number, 0 indexed
      * @param {string} color color as a hex string
      */
-    setLamp(lampNumber, ledNumber, color){
+    setLamp(lampNumber, ledNumber, color, intensity){
+        intensity = parseInt(intensity);
+        let intensityVal;
+        if (typeof(intensity) && intensity > 0 && intensity < 256) {
+            intensityVal = intensity;
+        } else {
+            intensityVal = 100;
+        }
+
         let msg;
         let err = 1;
         switch (lampNumber) {
@@ -66,7 +68,7 @@ export default class ArtnetHelpers {
             case !ledNumber:
                 msg = `No Led Number specified`;
                 break;
-            case this.colors[color]:
+            case colors[color]:
                 msg = `The specified color does not exist. Ensure you pick a color from ${JSON.stringify(this.colors, null)}`;
                 break;
             case !color:
@@ -80,7 +82,12 @@ export default class ArtnetHelpers {
             return msg;
         } else {
             let startAddr = lampNumber*8 + ledNumber*3 + 1;
-            artnet.set(startAddr, this.colors[color]);
+            let colorArray = [];
+            colors[color].forEach((channel) => {
+                channel = Math.ceil(((channel / 100) * intensityVal));
+                colorArray.push(channel);
+            });
+            artnet.set(startAddr, colorArray);
         }
     }
 

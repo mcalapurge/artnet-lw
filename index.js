@@ -20,15 +20,17 @@ artnetHelpers.resetUniverse(() => {
 
     app.get('/setcolor', (req, res) => {
         let msg = JSON.stringify(req.query, null, 2);
-        if (req.query.color && req.query.led && req.query.lamp) {
+            if (req.query.color && req.query.led && req.query.lamp && req.query.intensity) {
+            artnetHelpers.setLamp(req.query.lamp, req.query.led, req.query.color, req.query.intensity);
+        } else if (req.query.color && req.query.led && req.query.lamp) {
             artnetHelpers.setLamp(req.query.lamp, req.query.led, req.query.color);
         } else {
             msg = msg + '\nParams not provided for request.'
         }
         res.send(JSON.stringify(req.query), null, 2);
     });
-      
- 
+
+
     /**
      * route queryparams = hex & lamp & led
      * /sethexcolor?hex=ffffff&lamp=0&led=0
